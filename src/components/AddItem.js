@@ -21,7 +21,7 @@ const AddImg = styled.img`
 
 const AddItem = () => {
   return (
-    <Wrapper as={Link} to="/edit">
+    <Wrapper as={Link} to="/add">
       <AddImg src={addImg} alt="add" />
     </Wrapper>
   );

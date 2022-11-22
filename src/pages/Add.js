@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from "styled-components";
+import { Btn } from '../App';
 import Header from '../components/Header';
+import Import from '../components/Import';
 import Input from '../components/Input';
 import Textarea from '../components/Textarea';
 
@@ -25,10 +27,13 @@ const Add = () => {
 
   return (
     <>
-      <Header title="Добавление заметки" />
+      <Header title="Добавление заметки" back={true} />
       <Form>
         <Input onChange={changeTitleHandler} value={titleValue} placeholder="Название" />
         <Textarea onChange={changeTextHandler} value={textValue} placeholder="Описание" />
+        <Import />
+
+        <Btn>Сохранить</Btn>
       </Form>
     </>
   );

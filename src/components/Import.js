@@ -4,12 +4,14 @@ import importImg from "../images/import.svg";
 
 const Wrapper = styled.div`
   width: 100px;
-  height: 100px;
+  text-align: center;
+  cursor: pointer;
+  margin-top: 30px;
 `;
 
 const Img = styled.img`
   width: 100%;
-  height: 100%;
+  height: auto;
 `;
 
 const Text = styled.span`
@@ -17,15 +19,16 @@ const Text = styled.span`
   font-size: 16px;
   color: #B1C6B1;
   text-align: center;
+  margin-top: 5px;
 `;
 
 const Import = () => {
   return (
     <Wrapper>
-      <input id="fileInput" type="file" style={{opacity: 0}} />
-      <label htmlFor="fileInput">
+      <input id="fileInput" type="file" style={{display: "none"}} />
+      <label htmlFor="fileInput" style={{cursor: "pointer"}}>
         <Img src={importImg} alt="import" />
-        span
+        <Text>Add Files</Text>
       </label>
     </Wrapper>
   );

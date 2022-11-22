@@ -11,6 +11,19 @@ const Wrapper = styled.div`
   margin: 0 auto;
 `;
 
+export const Btn = styled.button`
+display: inline-block;
+max-width: 305px;
+width: 100%;
+min-height: 50px;
+background-color: #6EDF6C;
+color: #fff;
+font-size: 12px;
+font-weight: 600;
+border-radius: 10px;
+margin-top: 35px;
+`;
+
 const App = () => {
   return (
     <div className="App">
@@ -18,8 +31,8 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Main />}/>
           <Route path="/add" element={<Add />}/>
-          <Route path="/edit:id" element={<Edit />}/>
-          <Route path="/post:id" element={<Post />}/>
+          <Route path="/edit" element={<Edit />}/>
+          <Route path="/post" element={<Post />}/>
         </Routes>
       </Wrapper>
     </div>
