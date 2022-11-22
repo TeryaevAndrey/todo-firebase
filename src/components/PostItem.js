@@ -54,6 +54,8 @@ const Date = styled.span`
 
 const FullLink = styled.a`
   font-size: 11px;
+  color: #000;
+  text-decoration: none;
 `;
 
 const PostItem = ({title, text, isDoc, isReady, date}) => {
