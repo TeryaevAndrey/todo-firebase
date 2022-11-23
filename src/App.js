@@ -28,16 +28,16 @@ export const Btn = styled.button`
 const App = () => {
   return (
     <div className="App">
-      <Wrapper>
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/add" element={<Add />} />
-          <Route path="/edit" element={<Edit />} />
-          <Route path="/post" element={<Post />} />
-        </Routes>
-      </Wrapper>
-    </div>
+    <Wrapper>
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/auth" element={<Auth />} />
+        <Route path="/add" element={<Add />} />
+        <Route path="/edit" element={<Edit />} />
+        <Route path="/post" element={<Post />} />
+      </Routes>
+    </Wrapper>
+  </div> 
   );
 };
 
