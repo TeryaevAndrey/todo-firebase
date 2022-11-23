@@ -16,9 +16,9 @@ const InputStyle = styled.input`
   }
 `;
 
-const Input = ({placeholder, onChange, value}) => {
+const Input = ({placeholder, onChange, value, type = "text"}) => {
   return (
-    <InputStyle isReady={value.length > 0 ? true : false} onChange={onChange} value={value} type="text" placeholder={placeholder} />
+    <InputStyle type={type} isReady={value.length > 0 ? true : false} onChange={onChange} value={value} placeholder={placeholder} />
   );
 };
 

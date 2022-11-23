@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from "axios";
 import styled from "styled-components";
 import AddItem from '../components/AddItem';
 import Header from "../components/Header";
