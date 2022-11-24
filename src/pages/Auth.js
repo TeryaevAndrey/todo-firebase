@@ -58,8 +58,9 @@ const Auth = () => {
         setToken(user.accessToken);
 
         localStorage.setItem("token", user.accessToken);
+        localStorage.setItem("userId", user.reloadUserInfo.localId);
 
-        navigate("/");
+        navigate(`/${user.reloadUserInfo.localId}`); 
 
         alert("Успешно");
         // ...
@@ -76,7 +77,7 @@ const Auth = () => {
     <AuthContext.Provider
       value={{
         token, 
-        isAuth
+        isAuth: isAuth || localStorage.getItem("token")
       }}
     >
       <Header title="Вход/Регистрация" />
