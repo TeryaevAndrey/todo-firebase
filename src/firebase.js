@@ -13,7 +13,6 @@ const firebaseConfig = {
   storageBucket: "gs://todo-43aa9.appspot.com",
   messagingSenderId: "433219817495",
   appId: "1:433219817495:web:99d9e5f965852e2fcf4c52",
-  databaseUrl: "https://todo-43aa9-default-rtdb.firebaseio.com",
 };
 
 // Initialize Firebase
