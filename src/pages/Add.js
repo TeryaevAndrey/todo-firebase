@@ -15,20 +15,16 @@ const Form = styled.div`
 
 const FileList = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
+  flex-direction: column;
+  gap: 10px;
   align-items: center;
-`;
-
-const FileWrapper = styled.div`
-  width: 50px;
-  height: 50px;
-  border-radius: 5px;
+  margin-top: 15px;
 `;
 
 const Add = () => {
   const [titleValue, setTitleValue] = React.useState("");
   const [textValue, setTextValue] = React.useState("");
+  const [files, setFiles] = React.useState([]);
 
   const changeTitleHandler = (e) => {
     setTitleValue(e.target.value);
@@ -38,17 +34,26 @@ const Add = () => {
     setTextValue(e.target.value);
   }
 
+  const changeFiles = (e) => {
+    Array.from(e.target.files).forEach(file => {
+      setFiles(prev => [...prev, file]);
+    });
+  }
+
   return (
     <>
       <Header title="Добавление заметки" back={true} />
       <Form>
         <Input onChange={changeTitleHandler} value={titleValue} placeholder="Название" />
         <Textarea onChange={changeTextHandler} value={textValue} placeholder="Описание" />
-        <Import/>
+        <Import onChange={changeFiles}/>
 
         <FileList>
-          
-          
+          {
+            Array.from(files).map((file, index) => {
+              return <a href={URL.createObjectURL(file)} key={index} >{file.name}</a>
+            })
+          }
         </FileList>
 
         <Btn>Сохранить</Btn>
