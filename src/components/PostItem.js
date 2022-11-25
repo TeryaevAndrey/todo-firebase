@@ -67,7 +67,11 @@ const PostItem = ({title, text, isDoc, isReady, date}) => {
         </Title>
       </Header>
       <Text>{text}</Text>
-      {isDoc ? "+ файлы" : ""}
+      {isDoc ? (
+        <p style={{marginBottom: "10px"}}>+ файлы</p>
+      ) : (
+        ""
+      )}
       
       <Btn isReady={isReady ? true : false}>{isReady ? "Завершено" : "Завершить"}</Btn>
       <Footer>

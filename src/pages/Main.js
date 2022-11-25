@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import styled from "styled-components";
 import AddItem from '../components/AddItem';
@@ -15,13 +16,27 @@ const ItemList = styled.div`
 
 const Main = () => {
   const {logout} = useAuth();
+  const [posts, setPosts] = React.useState([]);
+
+  React.useEffect(() => {
+    axios.get("https://todo-43aa9-default-rtdb.firebaseio.com/posts.json")
+      .then(res => {
+          setPosts(Object.values(res.data));
+      });
+  }, []);
+
+  console.log(posts);
 
   return (
     <>
      <Header title="ToDo App" back={true} backTo="/auth" onClick={() => logout()} /> 
      <ItemList>
       <AddItem />
-      <PostItem title="Title" text="lorem ipsum" isDoc={false} date="22.11.2022" />
+        {
+          Array.from(posts).map(post => {
+            return <PostItem title={post.title} text={post.text} isDoc={post.files ? true : false} date={new Date(post.date).toLocaleDateString()} />
+          })
+        }
      </ItemList>
     </>
   );

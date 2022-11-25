@@ -63,6 +63,7 @@ const Add = () => {
       }
 
       axios.post("https://todo-43aa9-default-rtdb.firebaseio.com/posts.json", {
+        id: v4(),
         title: titleValue,
         text: textValue,
         date: new Date(),
