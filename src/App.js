@@ -1,13 +1,12 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Main from "./pages/Main";
 import Add from "./pages/Add";
 import Edit from "./pages/Edit";
 import Post from "./pages/Post";
 import Auth from "./pages/Auth";
-import { useContext } from "react";
-import { AuthContext } from "./context/auth.context";
+import { useAuth } from "./hooks/auth.hook";
 
 const Wrapper = styled.div`
   max-width: 410px;
@@ -29,17 +28,22 @@ export const Btn = styled.button`
 `;
 
 const App = () => {
-  const auth = useContext(AuthContext);
+  const {isAuth} = useAuth();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
-    console.log(auth);
-  }, [auth]);
+    if(!isAuth) {
+      navigate("/auth");
+    } else {
+      navigate("/");
+    }
+  }, [isAuth]);
 
   return (
     <div className="App">
     <Wrapper>
       <Routes>
-        <Route path="/:id" element={<Main />} />
+        <Route path="/" element={<Main />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/add" element={<Add />} />
         <Route path="/edit" element={<Edit />} />

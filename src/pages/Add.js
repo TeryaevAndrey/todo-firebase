@@ -13,6 +13,19 @@ const Form = styled.div`
   padding: 30px 0;
 `;
 
+const FileList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-items: center;
+`;
+
+const FileWrapper = styled.div`
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+`;
+
 const Add = () => {
   const [titleValue, setTitleValue] = React.useState("");
   const [textValue, setTextValue] = React.useState("");
@@ -31,9 +44,21 @@ const Add = () => {
       <Form>
         <Input onChange={changeTitleHandler} value={titleValue} placeholder="Название" />
         <Textarea onChange={changeTextHandler} value={textValue} placeholder="Описание" />
-        <Import />
+        <Import onChange={(e) => setFileUpload((prev) => [...prev, e.target.files])} />
 
-        <Btn>Сохранить</Btn>
+        <FileList>
+          {
+            fileUrls.map((url) => {
+              return (
+                <FileWrapper>
+                  
+                </FileWrapper>  
+              )
+            })
+          }
+        </FileList>
+
+        <Btn onClick={formHandler}>Сохранить</Btn>
       </Form>
     </>
   );

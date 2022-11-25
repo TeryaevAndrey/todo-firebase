@@ -24,12 +24,12 @@ const Back = styled.img`
   left: 25px;
 `;
 
-const Header = ({title, back = false, backTo = "/"}) => {
+const Header = ({title, back = false, backTo = "/", onClick}) => {
   return (
     <Wrapper>
       {
         back && (
-          <Link to={backTo}>
+          <Link onClick={onClick} to={backTo}>
             <Back src={BackImg} alt="back" />
           </Link>
         )

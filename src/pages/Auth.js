@@ -6,7 +6,7 @@ import { Btn } from "../App";
 import app from "../firebase";
 import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/auth.context";
+import { useAuth } from "../hooks/auth.hook";
 
 
 const Wrapper = styled.form`
@@ -19,8 +19,7 @@ const Wrapper = styled.form`
 const Auth = () => {
   const navigate = useNavigate();
   const auth = getAuth(app);
-  const [isAuth, setIsAuth] = React.useState(false);
-  const [token, setToken] = React.useState(undefined);
+  const {login, logout} = useAuth();
   
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -54,13 +53,9 @@ const Auth = () => {
         const user = userCredential.user;
         console.log(user);
 
-        setIsAuth(true);
-        setToken(user.accessToken);
+        login(user.accessToken, user.reloadUserInfo.localId);
 
-        localStorage.setItem("token", user.accessToken);
-        localStorage.setItem("userId", user.reloadUserInfo.localId);
-
-        navigate(`/${user.reloadUserInfo.localId}`); 
+        navigate(`/`); 
 
         alert("Успешно");
         // ...
@@ -68,19 +63,14 @@ const Auth = () => {
       .catch((error) => {
         const errorCode = error.code;
         // const errorMessage = error.message;
-        setIsAuth(false);
+        logout();
         alert(errorCode);
       });
   }
 
   return (
-    <AuthContext.Provider
-      value={{
-        token, 
-        isAuth: isAuth || localStorage.getItem("token")
-      }}
-    >
-      <Header title="Вход/Регистрация" />
+    <>
+    <Header title="Вход/Регистрация" />
       <Wrapper>
       <Input type="email" placeholder="Ваш email" onChange={(e) => setEmail(e.target.value)} value={email} />
       <Input type="password" placeholder="Пароль" onChange={(e) => setPassword(e.target.value)} value={password} />
@@ -88,7 +78,7 @@ const Auth = () => {
       <Btn onClick={signIn}>Войти</Btn>
       <Btn onClick={signUp} style={{marginTop: "10px"}}>Зарегистрироваться</Btn>
     </Wrapper>
-    </AuthContext.Provider>
+    </>
   );
 };
 

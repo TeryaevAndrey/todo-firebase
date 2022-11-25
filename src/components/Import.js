@@ -22,10 +22,10 @@ const Text = styled.span`
   margin-top: 5px;
 `;
 
-const Import = () => {
+const Import = ({onChange}) => {
   return (
     <Wrapper>
-      <input id="fileInput" type="file" style={{display: "none"}} />
+      <input id="fileInput" type="file" style={{display: "none"}} onChange={onChange} multiple="multiple" />
       <label htmlFor="fileInput" style={{cursor: "pointer"}}>
         <Img src={importImg} alt="import" />
         <Text>Add Files</Text>

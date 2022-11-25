@@ -1,9 +1,9 @@
 import React from 'react';
-import axios from "axios";
 import styled from "styled-components";
 import AddItem from '../components/AddItem';
 import Header from "../components/Header";
 import PostItem from '../components/PostItem';
+import { useAuth } from '../hooks/auth.hook';
 
 const ItemList = styled.div`
   display: flex;
@@ -14,9 +14,11 @@ const ItemList = styled.div`
 `;
 
 const Main = () => {
+  const {logout} = useAuth();
+
   return (
     <>
-     <Header title="ToDo App" /> 
+     <Header title="ToDo App" back={true} backTo="/auth" onClick={() => logout()} /> 
      <ItemList>
       <AddItem />
       <PostItem title="Title" text="lorem ipsum" isDoc={false} date="22.11.2022" />
