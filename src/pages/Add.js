@@ -1,3 +1,4 @@
+import { ref, uploadBytes } from 'firebase/storage';
 import React from 'react';
 import styled from "styled-components";
 import { Btn } from '../App';
@@ -5,6 +6,7 @@ import Header from '../components/Header';
 import Import from '../components/Import';
 import Input from '../components/Input';
 import Textarea from '../components/Textarea';
+import { storage } from '../firebase';
 
 const Form = styled.div`
   display: flex;
@@ -40,6 +42,23 @@ const Add = () => {
     });
   }
 
+  const formHandler = () => {
+    try {
+      if(files) {
+        files.forEach(file => {
+          const storageRef = ref(storage, `files/${file.name}`);
+  
+          uploadBytes(storageRef, file).then((snapshot) => {
+          })
+        });
+      }
+
+      alert("Успешно");
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
   return (
     <>
       <Header title="Добавление заметки" back={true} />
@@ -56,7 +75,7 @@ const Add = () => {
           }
         </FileList>
 
-        <Btn>Сохранить</Btn>
+        <Btn onClick={formHandler}>Сохранить</Btn>
       </Form>
     </>
   );
