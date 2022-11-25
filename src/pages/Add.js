@@ -51,7 +51,7 @@ const Add = () => {
     });
   }
 
-  const formHandler = (postId, title, text, files, date) => {
+  const formHandler = () => {
     try {
       if(files) {
         files.forEach(file => {
