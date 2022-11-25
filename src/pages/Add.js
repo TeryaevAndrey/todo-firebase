@@ -44,21 +44,14 @@ const Add = () => {
       <Form>
         <Input onChange={changeTitleHandler} value={titleValue} placeholder="Название" />
         <Textarea onChange={changeTextHandler} value={textValue} placeholder="Описание" />
-        <Import onChange={(e) => setFileUpload((prev) => [...prev, e.target.files])} />
+        <Import/>
 
         <FileList>
-          {
-            fileUrls.map((url) => {
-              return (
-                <FileWrapper>
-                  
-                </FileWrapper>  
-              )
-            })
-          }
+          
+          
         </FileList>
 
-        <Btn onClick={formHandler}>Сохранить</Btn>
+        <Btn>Сохранить</Btn>
       </Form>
     </>
   );
