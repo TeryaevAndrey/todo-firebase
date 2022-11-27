@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Btn } from "../App";
 import Header from "../components/Header";
-import { database, storage } from "../firebase";
+import {storage } from "../firebase";
 
 const Wrapper = styled.div`
   display: flex;
@@ -31,17 +31,20 @@ const Text = styled.p`
 
 const DocList = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 15px;
+  margin-top: 20px;
 `;
 
 const Post = () => {
   const {id} = useParams();
   const [post, setPost] = React.useState({});
   const [filesNames, setFilesNames] = React.useState([]);
+  const [links, setLinks] = React.useState([]);
 
   React.useEffect(() => {
-    axios.get(`https://todo-43aa9-default-rtdb.firebaseio.com/posts.json`).then(res => {
+    axios.get(`https://todo-43aa9-default-rtdb.firebaseio.com/posts.json`).then( res => {
       Object.values(res.data).forEach(post => {
         if(post.id === id) {
           setPost(post);
@@ -54,21 +57,23 @@ const Post = () => {
     });
   }, []);
 
-  getDownloadURL(ref(storage, "files/математика 25.11.docx"))
-    .then(url => {
-      const xhr = new XMLHttpRequest();
-      xhr.responseType = "blob";
-      xhr.onload = event => {
-        const blob = xhr.response;
-      };
+  React.useEffect(() => {
+    if(filesNames) {
+      filesNames.forEach(async file => {
+        await getDownloadURL(ref(storage, `files/${file}`))
+      .then(url => {
+        setLinks(prev => [...prev, {
+          title: file,
+          url: url
+        }]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+      })
+    }
+  }, [filesNames]);
 
-      xhr.open("GET", url);
-      xhr.send();
-
-      console.log(url);
-    }).catch(err => {
-      
-    });
 
   return (
     <>
@@ -78,7 +83,11 @@ const Post = () => {
         <Text>{post.text}</Text>
 
         <DocList>
-
+          {
+            links.map((link, index) => {
+              return <a href={link.url} key={index}>{link.title}</a>
+            })
+          }
         </DocList>
 
         <Btn style={{backgroundColor: "#6EDF6C"}}>Изменить</Btn>
