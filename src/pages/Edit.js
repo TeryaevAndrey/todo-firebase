@@ -8,7 +8,7 @@ import Header from "../components/Header";
 import Import from "../components/Import";
 import Input from "../components/Input";
 import Textarea from "../components/Textarea";
-import { storage } from "../firebase";
+import { database, storage } from "../firebase";
 import { v4 } from "uuid";
 
 const Form = styled.form`
@@ -35,6 +35,12 @@ const Edit = () => {
   const [files, setFiles] = React.useState([]);
   const [filesNames, setFilesNames] = React.useState([]);
   const [links, setLinks] = React.useState([]);
+
+  React.useEffect(() => {
+    files.forEach(file => {
+      setFilesNames(prev => [...prev, file.name]);
+    });
+  }, []);
 
   React.useEffect(() => {
     axios
@@ -99,14 +105,6 @@ const Edit = () => {
         });
       }
 
-      // axios.patch("https://todo-43aa9-default-rtdb.firebaseio.com/posts.json", {
-      //   id: v4(),
-      //   title: titleValue,
-      //   text: textValue,
-      //   date: new Date(),
-      //   files: filesNames,
-      //   isReady: false
-      // });
 
       alert("Успешно");
     } catch (err) {
