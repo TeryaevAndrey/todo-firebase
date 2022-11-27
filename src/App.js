@@ -46,7 +46,7 @@ const App = () => {
         <Route path="/" element={<Main />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/add" element={<Add />} />
-        <Route path="/edit" element={<Edit />} />
+        <Route path="/edit/:id" element={<Edit />} />
         <Route path="/post/:id" element={<Post />} />
       </Routes>
     </Wrapper>

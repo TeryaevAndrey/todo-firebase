@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getDownloadURL, ref } from "firebase/storage";
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Btn } from "../App";
 import Header from "../components/Header";
@@ -42,6 +42,7 @@ const Post = () => {
   const [post, setPost] = React.useState({});
   const [filesNames, setFilesNames] = React.useState([]);
   const [links, setLinks] = React.useState([]);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     axios.get(`https://todo-43aa9-default-rtdb.firebaseio.com/posts.json`).then( res => {
@@ -55,7 +56,7 @@ const Post = () => {
         }
       })
     });
-  }, []);
+  }, [id]);
 
   React.useEffect(() => {
     if(filesNames) {
@@ -74,6 +75,9 @@ const Post = () => {
     }
   }, [filesNames]);
 
+  const editBtnHandler = (id) => {
+    navigate(`/edit/${id}`);
+  }
 
   return (
     <>
@@ -90,7 +94,7 @@ const Post = () => {
           }
         </DocList>
 
-        <Btn style={{backgroundColor: "#6EDF6C"}}>Изменить</Btn>
+        <Btn onClick={() => editBtnHandler(post.id)} style={{backgroundColor: "#6EDF6C"}}>Изменить</Btn>
         <Btn style={{backgroundColor: "#CB0404", marginTop: "10px"}}>Удалить</Btn>
       </Wrapper>
     </>
