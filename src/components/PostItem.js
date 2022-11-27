@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -58,7 +58,7 @@ const FullLink = styled.a`
   text-decoration: none;
 `;
 
-const PostItem = ({title, text, isDoc, isReady, date}) => {
+const PostItem = ({title, text, isDoc, isReady, date, id}) => {
   return (
     <Wrapper>
       <Header>
@@ -76,7 +76,7 @@ const PostItem = ({title, text, isDoc, isReady, date}) => {
       <Btn isReady={isReady ? true : false}>{isReady ? "Завершено" : "Завершить"}</Btn>
       <Footer>
         <Date>{date}</Date>
-        <FullLink as={Link} to="/post">Смотреть полностью</FullLink>
+        <FullLink as={Link} to={`/post/${id}`}>Смотреть полностью</FullLink>
       </Footer>
     </Wrapper>
   );

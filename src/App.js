@@ -47,7 +47,7 @@ const App = () => {
         <Route path="/auth" element={<Auth />} />
         <Route path="/add" element={<Add />} />
         <Route path="/edit" element={<Edit />} />
-        <Route path="/post" element={<Post />} />
+        <Route path="/post/:id" element={<Post />} />
       </Routes>
     </Wrapper>
   </div> 
